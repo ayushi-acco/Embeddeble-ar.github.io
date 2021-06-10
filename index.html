@@ -1,0 +1,32 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embed AR</title>
+    <script type="text/javascript">
+        window.addEventListener('load', () => {
+            document.hasStorageAccess().then(hasAccess => {
+                console.log('hasAccess: ' + hasAccess);
+                if (!hasAccess) {
+                    return document.requestStorageAccess();
+                }
+            }).then(_ => {
+                console.log('Now we have first-party storage access!');
+                console.log('After Access iframe cookie' + document.getElementById("iframeId").contentDocument.cookie);
+                document.cookie = "Authsav=QkQ0LjAAAAADFVm40e4DxHT6PVXYrbWWBIho4PyWNC+87x6PDksriIPR3cgjpDdUs9V4VXUYhu2AGmPjBKajcyNA8q8KEcQrIZ/tahMNYMy9Ju5dyIzP7f4K7l08+042j+0="
+                console.log(`test setting of document.cookie: ${document.cookie}`);
+            }).catch(_ => {
+                console.log('error');
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <iframe src="https://ny.matrix-uat.ms.com/eqr/research/webapp/static/bot/index.html"
+    style="height: 600px;width: 400px;" id="iframeId"
+    sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-forms"></iframe>
+</body>
+
+</html>
